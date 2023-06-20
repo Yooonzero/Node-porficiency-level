@@ -35,7 +35,14 @@ router.patch('/todos/:todoId', async (req, res) => {
     }
     if (order) {
         const targetTodo = await Todo.findOne({ order }).exec();
+        if (targetTodo) {
+            targetTodo.order = currentTodo.order;
+            await targetTodo.save();
+        }
+        currentTodo.order = order;
+        await currentTodo.save();
     }
+    res.send();
 });
 
 module.exports = router;
