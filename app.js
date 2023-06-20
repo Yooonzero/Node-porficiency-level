@@ -1,14 +1,11 @@
 const express = require('express');
-
+const todosRouter = require('./routes/todos.router.js');
+const db = require('./models/index.js');
 const app = express();
-const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('Hi!');
-});
-app.use('/api', express.json(), router);
+app.use('/api', express.json(), todosRouter);
+app.use(express.static('./assets'));
 
 app.listen(8080, () => {
     console.log('서버가 켜졌어요!');
 });
-console.log('hello');
